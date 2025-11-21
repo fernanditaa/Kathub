@@ -8,6 +8,10 @@ import com.example.kathub.kathub.model.Usuario;
 @Repository
 public interface  UsuarioRepository extends JpaRepository<Usuario, Long> {
 
-    Usuario findByCorrepAndPassword(String correo, String password);
+    Usuario findByEmailAndContrasena(String email, String contrasena);
+
+    boolean existsByEmail(String email);
+
+
     
 }
