@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.example.kathub.kathub.model.Ventas;
 
+//definimos la clase que va a acceder a la base de datos
 @Repository
 public interface  VentaRepository extends JpaRepository<Ventas, Long> {
     List<Ventas> findByUsuarioId(Long usuario);

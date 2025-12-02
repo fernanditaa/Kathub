@@ -1,10 +1,11 @@
 package com.example.kathub.kathub.service;
-import org.springframework.stereotype.Service;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.kathub.kathub.repository.VentaRepository;
+import org.springframework.stereotype.Service;
+
 import com.example.kathub.kathub.model.Ventas;
-import java.util.List;
+import com.example.kathub.kathub.repository.VentaRepository;
 
 @Service
 public class VentaService {

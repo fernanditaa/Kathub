@@ -28,7 +28,7 @@ import com.example.kathub.kathub.service.PedidoService;
 
 @RestController
 @RequestMapping("/api/pedidos")
-@CrossOrigin(origins = "http://localhost:5173")// para abrir despues con el front
+@CrossOrigin(origins = "http://localhost:5174")// para abrir despues con el front
 public class PedidoController {
 
     @Autowired

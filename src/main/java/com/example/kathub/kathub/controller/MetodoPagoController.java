@@ -19,7 +19,7 @@ import com.example.kathub.kathub.repository.MetodoPagoRepository;
 
 @RestController
 @RequestMapping("/api/metodos-pago")
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5174")
 public class MetodoPagoController {
     
     @Autowired
