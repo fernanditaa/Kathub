@@ -40,4 +40,12 @@ public class Ventas {
     public void setMetodoPago(MetodoPago metodoPago) {
         this.metodoPago = metodoPago;
     }
+
+    public void setProducto(Producto producto){
+        this.producto = producto;
+    }
+
+    public Producto getProducto(){
+        return this.producto;
+    }
 }

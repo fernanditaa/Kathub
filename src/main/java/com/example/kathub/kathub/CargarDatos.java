@@ -20,7 +20,7 @@ import com.example.kathub.kathub.service.UsuarioService;
 public class CargarDatos {
 
     @Bean
-    CommandLineRunner initDatabase(UsuarioService usuarioRepository,
+    CommandLineRunner initDatabase(UsuarioService usuarioService,
                                     ProductoRepository productoRepository,
                                     PedidoRepository pedidoRepository,
                                     VentaRepository ventaRepository,
@@ -28,34 +28,25 @@ public class CargarDatos {
         return args -> {
 
            
-                System.out.println("Datos ya cargados, no se realizará ninguna acción.");
+                System.out.println("Iniciando carga de datos inicial...");
                
+            Usuario u = usuarioService.findByEmail("kathub@gmail.com");
             
-            
-            Usuario u = new Usuario();
-            u.setNombre("Fernanda");
-            u.setApellido("Arraño");
+            if (u == null) {
+                u = new Usuario();
+            u.setNombre("Kat");
+            u.setApellido("Hub");
             u.setTelefono("930357394");
             u.setDireccion("calle 1");
-            u.setEmail("fer.@gmail.com");
+            u.setEmail("kathub@gmail.com");
             u.setContrasena("123456789");
 
-            usuarioRepository.save(u);
+            usuarioService.save(u);
             System.out.println("Usuario guardado: " + u.getNombre());
-
-            Producto p = new Producto();
-            p.setNombre("Chopper");
-            p.setDescripcion("Amigurimi tejido de algodón");
-            p.setCategoria("Amigurumi");
-            p.setMedida(" ");
-            p.setPrecio(19.99);
-            p.setStock(5);
+            } else {
+                System.out.println("Usuario ya existe: " + u.getEmail());
+            }
             
-
-            productoRepository.save(p);
-            System.out.println("Producto guardado: " + p.getNombre());
-
-
             List<Producto> productos = List.of(
                 new Producto("TurboAbuela", "Personaje del anime 'DanDaDan'", "20 cm", 20000.0, 5, "Amigurumi"),
                 new Producto("Recuerdo en forma de corazón", "Souvenir por docena para Matrimonio", "5 cm", 13000.0, 10, "Recuerdo"),
@@ -79,10 +70,15 @@ public class CargarDatos {
                 new Producto("Body", "Recuerdo tejido con forma de body de bebé", "6 cm", 7000.0, 12, "Recuerdo"),
                 new Producto("Gorro turbante", "Turbante gris con brillos y flor", "Talla bebé", 10000.0, 8, "Gorro")
             );
- 
 
-            // Guardar todos los productos
-            productos.forEach(productoRepository::save);
+            for (Producto prod : productos) {
+                if (!productoRepository.existsByNombre(prod.getNombre())) {
+                    productoRepository.save(prod);
+                    System.out.println("Producto creado: " + prod.getNombre());
+                } else {
+                    System.out.println("Producto ya existe: " + prod.getNombre());
+                }
+            }
 
             MetodoPago mp = new MetodoPago();
             mp.setNombre("Tarjeta de Crédito");
@@ -94,7 +90,8 @@ public class CargarDatos {
             venta.setTotal(19.99);
             venta.setFecha(java.time.LocalDate.now());
             venta.setEstado("COMPLETADO");
-            venta.setProducto(p);
+            Producto primerProducto = productoRepository.findAll().get(0);
+            venta.setProducto(primerProducto);
             ventaRepository.save(venta);
             System.out.println("Venta guardada: " + venta.getId());
 

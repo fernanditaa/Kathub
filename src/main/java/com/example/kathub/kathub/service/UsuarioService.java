@@ -1,12 +1,14 @@
 package com.example.kathub.kathub.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.example.kathub.kathub.model.Usuario;
 import com.example.kathub.kathub.repository.UsuarioRepository;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -30,6 +32,10 @@ public class UsuarioService {
     public Usuario save(Usuario usuario) {
         return usuarioRepository.save(usuario);
     }
+    public Usuario findByEmail(String email) {
+    return usuarioRepository.findByEmail(email);
+    }
+
 
     public Usuario findByEmailAndContrasena(String email, String contrasena) {
         return usuarioRepository.findByEmailAndContrasena(email, contrasena);
