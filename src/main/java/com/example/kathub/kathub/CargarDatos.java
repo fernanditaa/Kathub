@@ -32,6 +32,7 @@ public class CargarDatos {
                 return;
             }
             
+
             List<Producto> productos = List.of(
                 new Producto("TurboAbuela", "Personaje del anime 'DanDaDan'", "20 cm", 20000.0, 5, "Amigurumi",  "http://localhost:8080/images/turboabuela.webp"),
                 new Producto("Recuerdo en forma de corazón", "Souvenir por docena para Matrimonio", "5 cm", 13000.0, 10, "Recuerdo",  "http://localhost:8080/images/corazon.webp"),
@@ -57,7 +58,7 @@ public class CargarDatos {
             );
 
             productos.forEach(productoRepository::save);
-            System.out.println("Productos cargados" + productos.size());
+            System.out.println("Productos cargados " + productos.size());
 
         };
     }
